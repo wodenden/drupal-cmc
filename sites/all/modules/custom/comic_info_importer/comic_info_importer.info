@@ -1,0 +1,4 @@
+name = Comic Info Importer
+description = "Import comic information from sqlite3."
+package = Comic
+core = 7.x

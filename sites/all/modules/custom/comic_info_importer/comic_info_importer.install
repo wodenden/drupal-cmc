@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the admin menu module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function comic_info_importer_schema() {
+
+  $schema['comic'] = array(
+    'description' => 'The base table for comics.',
+    'fields' => array(
+      'comic_id' => array(
+        'description' => 'The primary identifier for a comic.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE
+      ),
+      'isbn_code' => array(
+        'description' => 'The ISBN CODE of this comic.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'title' => array(
+        'description' => 'The Title of this comic.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'author_id' => array(
+        'description' => 'The author ID of this comic.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'thumnail_id' => array(
+        'description' => 'The thumnail ID of this comic.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the comic is alive.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the comic was imported.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the comic was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'commic_title'        => array('title'),
+      'author_id'           => array('author_id'),
+      'comic_created'       => array('created'),
+      'comic_changed'       => array('changed'),
+    )
+    'unique keys' => array(
+      'isbn_code' => array('isbn_code'),
+    ),
+    'primary key' => array('comic_id'),
+  );
+  $schema['commic_path'] = array(
+    'description' => 'The series info of comics.',
+    'fields' => array(
+      'comic_id' => array(
+        'description' => 'Comic ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'path' => array(
+        'description' => 'The Title of this comic.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => ''),
+    ),
+    'indexes' => array(
+      'commic_title'        => array('title'),
+      'author_id'           => array('author_id'),
+      'comic_created'       => array('created'),
+      'comic_changed'       => array('changed'),
+    )
+    'unique keys' => array(
+      'isbn_code' => array('isbn_code'),
+    ),
+    'primary key' => array('comic_id'),
+  );
+  $schema['commic_series'] = array(
+    'description' => 'The series info of comics.',
+  );
+  $schema['comic_author'] = array(
+    'description' => 'The author info of comics.',
+  );
+  $schema['comic_edit_history'] = array(
+    'description' => 'The edit history of comics info.',
+  );
+  $schema['comic_thumnail'] = array(
+    'description' => 'The thumnail info of comics.',
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function comic_info_importer_install() {
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function comic_info_importer_uninstall() {
+
+}
